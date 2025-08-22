@@ -1,0 +1,20 @@
+services:
+  db:
+    image: ankane/pgvector
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: khushi
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: wardrobe
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile # make sure this matches your file name
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      PORT: 8080
